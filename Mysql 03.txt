@@ -1,0 +1,97 @@
+1. Creating of Employee table
+
+CREATE TABLE Employee
+(Name varchar(30),
+Dept_No int(3),
+ssn int(6),
+Bdate varchar(12),
+Address varchar(15),
+salary int(7),
+Supervisor_ssn int(10),
+P_no int(5)
+);
+
+2. Creating of Department table
+
+CREATE TABLE Department
+(D_name varchar(30),
+D_location varchar(10),
+D_number int(2),
+MGR_ssn int(7)
+);
+
+# insert values
+INSERT INTO department (D_name, D_location, D_number, MGR_ssn) 
+VALUES ('cse', 'dhaka', '10', '707'), 
+('eee', 'khulna', '11', '708');
+
+
+3. Creating of projet table
+
+CREATE TABLE Project
+(P_name varchar(30),
+P_no int(2),
+Budget int(10),
+hours int(7),
+D_num int(2)
+);
+
+4.
+
+SELECT name, ssn, Dept_no, D_name
+FROM employee JOIN department
+ON employee.Dept_No = department.D_number;
+
+5. Find the employees name, ssn, D_name who works in researh depertment
+
+SELECT name, ssn, Dept_no, D_name
+FROM employee JOIN department
+ON employee.Dept_No = department.D_number AND
+d_name = "Research";
+
+6. Find the name and salary who is taking third highest salary
+
+SELECT name, salary
+FROM employee
+ORDER BY salary DESC
+LIMIT 2,1;
+
+7. 
+
+SELECT project.P_no, project.P_name, COUNT(*)
+FROM project JOIN employee
+ON project.P_no = employee.P_no
+GROUP BY project.P_no;
+
+8. find the name, ssn, Date of birth of all suprvisor
+
+SELECT *
+FROM employee
+WHERE ssn IN (SELECT DISTINCT Supervisor_ssn
+              FROM employee);
+OR?
+
+SELECT *
+FROM employee
+WHERE ssn = Supervisor_ssn;
+
+9. Find the 
+
+SELECT D_name
+FROM department
+WHERE D_number = (SELECT Dept_No
+                  FROM employee
+                  GROUP BY Dept_No
+                  ORDER BY MAX(salary) DESC
+                  LIMIT 1);
+
+10. Employee name, Department name and projet name
+
+SELECT employee.Name, department.D_name, project.P_name
+FROM employee INNER JOIN department
+ON employee.Dept_No = department.D_number
+INNER JOIN project
+ON department.D_number = project.D_num;
+
+
+

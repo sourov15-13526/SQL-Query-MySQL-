@@ -1,0 +1,251 @@
+LAB-2////////////////////////////////////////:
+
+1. Create Database:  
+CREATE DATABASE sec_n
+
+2. Delete Database:
+DROP DATABASE sec_n;
+
+3. Create Table in Database:
+CREATE TABLE student_info
+(
+    Roll SMALLINT(5),
+    Name varchar (15),
+    CGPA float(3,2),
+    Age tinyint (10),
+    Address varchar (15),
+    Gender char(7)    
+    );
+
+4.To insert values in Table: 
+INSERT INTO student_info(Roll,Name,CGPA,Age,Address,Gender)
+VALUES(100,'Sourov',3.74,22,'Mohammadpur','Male'),
+(101,'Rabeya',3.54,20,'Mohammadpur','Female'),
+(102, 'Aiyub', 3.72, 22, 'Bagura','Male');
+
+5. To show full Table:
+
+SELECT * FROM student_info;
+
+6. Show spcific Attributes in Table
+
+SELECT Name,Address
+FROM student_info;
+
+7. Show unserially attributs in Table
+
+SELECT Gender, Address, Name, Roll 
+FROM student_info;
+
+8. Show All attributes in specific row
+
+SELECT *  
+FROM student_info
+WHERE Roll = 120;
+
+9. Show specific attributes in specific row
+
+SELECT Name, Roll, Gender, Address  
+FROM student_info
+WHERE Roll = 120;
+
+LAB-3///////////////////////////////////////////////:
+
+
+1. To know how many types have data in a attribute
+
+SELECT DISTINCT Address
+from student_info;
+
+2. Data show with limit in whole data as row wise
+
+SELECT * 
+FROM student_info
+LIMIT 2;
+
+3.1 Data show with limit range in whole data as row wise
+
+SELECT * 
+from student_info 
+LIMIT 5, 4; [NOTE: 5 means starting after the data, 4 means number of data]
+
+3.2. Data show with between range in whole data as row wise
+ 
+SELECT *
+FROM student_info
+WHERE Roll BETWEEN 100 AND 101;
+
+4. Find out the information with two conditions/ AND
+
+SELECT *
+FROM student_info
+WHERE Address='mohammadpur' AND Age=20;
+
+5. Find out the information one condition in between/OR
+
+SELECT *
+FROM student_info
+WHERE Gender = 'Male' or Age>20;
+
+6. find out the information with multiple condition/ (AND/OR)
+
+SELECT *
+FROM student_info
+WHERE Address='bagura' AND (Gender = 'Male' or Age>20);
+
+7. fetch out the information in assending order
+
+SELECT * 
+FROM student_info
+ORDER BY Age ASC;
+
+8. fetch out the information in dessending order
+
+SELECT * 
+FROM student_info
+ORDER BY roll DESC;
+
+9. Fegure out the information with condition and order by both
+ 
+SELECT * 
+FROM student_info
+WHERE Gender = "Male"
+ORDER BY Roll DESC;
+
+10. To know the information with 'In' command likewise multiple or conditions
+
+SELECT * 
+FROM student_info
+WHERE Address IN('mohammadpur','kustia')
+
+11. Find out the information with 'NOT IN' likewise avoiding some conditions
+
+SELECT * 
+FROM student_info
+WHERE Address NOT IN('mohammadpur','kustia')
+
+12. find out the info with ending string
+
+SELECT * 
+FROM student_info
+WHERE Address LIKE "%pur";
+
+13. find out the info with starting string 
+
+SELECT * 
+FROM student_info
+WHERE Name LIKE "s%";
+
+14. find out the info with any index of the string
+  
+SELECT * 
+FROM student_info
+WHERE Address LIKE "%mm%";
+
+
+Lab-4////////////////////////////////////:
+
+1. To update a value in attribute as row wise
+
+UPDATE student_info
+SET Address = "Bogura"
+WHERE Roll = 12;
+
+2. To update several values in attribute as row wise
+
+UPDATE student_info
+SET Address = "Manikganj", age = 24
+WHERE Roll = 123;  
+
+3. Set as a nikename of the attribute name
+
+SELECT name as Student_name, age as Student_age
+FROM student_info;
+
+4. add attribute in a table
+
+ALTER TABLE student_info
+ADD demo char(7);
+
+5. Delete a column in a table
+
+ALTER TABLE student_info
+DROP COLUMN demo;
+
+6. Delete a row in a table
+
+DELETE FROM student_info
+WHERE roll = 40;
+
+7. To do empty all infromation on the table
+
+TRUNCATE TABLE student_info;
+
+8. To know minimum value in column
+
+SELECT MIN(Due) as Lowest_Due
+FROM student_info;
+
+9. To know minimum and maximum value in several columns
+
+SELECT MIN(Due), MAX(Roll)
+FROM student_info;
+
+10. To know summation of the column
+
+SELECT SUM(Due)
+FROM student_info;
+
+11. To know Average of the column
+
+SELECT AVG(CGPA)
+FROM student_info;
+
+12. To count how many information belonging to in the table
+
+SELECT COUNT(*)
+FROM student_info;
+
+13. To know about specific column in the table
+
+SELECT MIN(Roll) as Lowest_Roll
+FROM student_info
+WHERE Gender = "Female";
+
+14. To know group by information
+
+SELECT Address, SUM(CGPA) as Lowest_Roll
+FROM student_info
+GROUP BY Address;
+
+SELECT Address, COUNT(Address) as Total_student_of_Dhaka
+FROM student_info
+WHERE Address = "Dhaka";
+
+15. To know about specicif order by information
+
+SELECT Address, SUM(CGPA) as Total_Due
+FROM student_info
+GROUP by Address
+ORDER BY Total_Due DESC;
+
+16. summetion of specific column group by specific command with condition
+
+SELECT Address, SUM(Due) as Total_Due
+FROM student_info
+GROUP by Address
+HAVING Total_Due > 50000;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

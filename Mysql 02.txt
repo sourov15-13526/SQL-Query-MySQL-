@@ -1,0 +1,108 @@
+1. Write a SQL query to display maximum salary from EMP table.
+
+SELECT MAX(Salary)
+FROM emp
+
+2.Write a SQL query to display Employee name who is taking maximum salary
+ 
+SELECT Name, Salary
+FROM emp
+WHERE Salary = (SELECT MAX(Salary)
+                FROM emp)
+
+3. Write a SQL query to display Employee name who is taking Average salary
+
+SELECT Name, Salary
+FROM emp
+WHERE Salary = (SELECT AVG(Salary)
+                FROM emp)
+
+4. Write a SQL query to display second highest salary from EMP table.
+
+SELECT MAX(Salary)
+FROM emp
+WHERE Salary != (SELECT MAX(Salary)
+                FROM emp)
+
+5. Write a SQL query to display Employee information who is taking second highest salary
+
+SELECT *
+FROM emp
+WHERE Salary = (SELECT MAX(Salary)
+                FROM emp
+                WHERE Salary != (SELECT MAX(Salary)
+                                 FROM emp));
+
+6. Write a SQL which would make twice in employee salary
+
+UPDATE emp
+SET Salary = Salary*2;
+
+7. Increase salary by 1 thousand for those whose salary is less than 50000
+
+UPDATE emp
+SET Salary = Salary+1000
+WHERE Salary < 50000;
+
+8. Increase salary by 1 thousand for those whose salary is less than average salary
+
+UPDATE emp
+SET Salary = Salary+1000
+WHERE Salary < (SELECT AVG(Salary)
+                FROM emp);
+
+9. Delete the minimum salary from the table
+
+DELETE
+FROM emp
+WHERE Salary = (SELECT min(Salary)
+                FROM emp);
+
+10. Write a query to display all the dept names along with No. of employees working in that.
+SELECT Dept, COUNT(Dept)
+FROM emp
+GROUP by Dept
+
+11. Write a query to display all the dept names where No. of employees are less than 2.
+SELECT Dept, COUNT(Dept)
+FROM emp
+GROUP by Dept
+HAVING COUNT(*) < 2;
+
+12. Write a query to display highest salary department wise and name of the employee who is taking that
+salary.
+
+SELECT Name
+FROM emp
+WHERE Salary IN(SELECT MAX(Salary)
+              FROM emp
+              GROUP by Dept)
+
+13. Write a query to display the employee names who is working in a department where No. of employees
+are less than 2.
+
+SELECT Name
+FROM emp
+WHERE Dept IN(SELECT Dept
+              FROM emp
+              GROUP by Dept
+              HAVING COUNT(*) < 2)
+
+14. Write a query to display the employee information who is working in a department where No. of employees
+are less than 2.
+
+SELECT *
+FROM emp
+WHERE Dept IN(SELECT Dept
+              FROM emp
+              GROUP by Dept
+              HAVING COUNT(*) < 2)
+
+15. Show the information of those who get more than the average salary in the department of CSE.
+SELECT *
+FROM emp
+WHERE Salary>(SELECT AVG(Salary)
+              FROM emp
+              WHERE Dept = "CSE");
+
+
